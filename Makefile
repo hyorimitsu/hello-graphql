@@ -14,6 +14,7 @@ down:
 deps: deps-api deps-web
 
 deps-api:
+	docker-compose -f docker-compose-tools.yaml run --rm -v "$$(pwd)/$(API_DIR)":/app -w /app go-mod go mod tidy
 	docker-compose -f docker-compose-tools.yaml run --rm -v "$$(pwd)/$(API_DIR)":/app -w /app go-mod go mod vendor
 
 deps-web:
