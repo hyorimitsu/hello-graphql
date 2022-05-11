@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  api:
+    image: ${PROJECT_NAME}:go-${DOCKER_BUILD_VERSION}
+    build: ./docker/golang
+    command: air -c .air.toml
+    ports:
+      - "8080:8080"
+      - "2345:2345"
+    volumes:
+      - ${API_DIR}:${API_GOPATH}
+    working_dir: ${API_GOPATH}
+    environment:
+      - ENVCODE
+    container_name: api
+
+  web:
+    image: node:18.1.0-alpine3.14
+    command: yarn run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${WEB_DIR}:/app
+    working_dir: /app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - api
+    restart: always
+    container_name: web

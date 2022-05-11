@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  gql:
+    image: ${PROJECT_NAME}:graphql-${DOCKER_BUILD_VERSION}
+    build: ./docker/graphql
+    command: init
+
+  go-mod:
+    image: ${PROJECT_NAME}:go-${DOCKER_BUILD_VERSION}
+    build: ./docker/golang
+    command: go mod
+
+  node:
+    image: node:18.1.0-alpine3.14
+    command: yarn
