@@ -1,0 +1,19 @@
+query findTodos {
+  todos {
+    text
+    done
+    user {
+      name
+    }
+  }
+}
+
+mutation createTodo($input: NewTodo!) {
+  createTodo(input: $input) {
+    text
+    done
+    user {
+      name
+    }
+  }
+}
