@@ -1,0 +1,13 @@
+overwrite: true
+schema: "http://host.docker.internal:8080/query"
+documents: "graphql/**/*.graphql"
+generates:
+  gen/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-urql":
+          urqlImportFrom: "../lib/urql/index.ts"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
