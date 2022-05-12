@@ -19,3 +19,9 @@ deps-api:
 
 deps-web:
 	docker-compose -f docker-compose-tools.yaml run --rm -v "$$(pwd)/$(WEB_DIR)":/app -w /app node yarn install
+
+gql-%:
+	docker-compose -f docker-compose-tools.yaml run --rm -v "$$(pwd)/$(API_DIR)":/app -w /app gql $*
+
+yarn-%:
+	docker-compose -f docker-compose-tools.yaml run --rm -v "$$(pwd)/$(WEB_DIR)":/app -w /app node yarn run $*
